@@ -15,17 +15,17 @@ export default function ChampionCard({ username, data }: { username: string, dat
       style={{ backgroundImage: "url('/template.png')" }}
     >
       {/* Kullanıcı adı */}
-      <div className="absolute top-[66px] left-[310px] text-xl font-bold">
+      <div className="absolute top-[50px] left-[295px] text-2xl font-bold">
         @{username}
       </div>
 
-      {/* Rank ve Title Verileri */}
+      {/* Rank + Title satırları - biraz daha aşağı alındı */}
       {[
-        { time: '7d', top: 220 },
-        { time: '30d', top: 285 },
-        { time: '3m', top: 350 },
-        { time: '6m', top: 415 },
-        { time: '12m', top: 480 },
+        { time: '7d', top: 240 },
+        { time: '30d', top: 310 },
+        { time: '3m', top: 380 },
+        { time: '6m', top: 450 },
+        { time: '12m', top: 520 },
       ].map(({ time, top }) => (
         <div
           key={time}
@@ -37,7 +37,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
         </div>
       ))}
 
-      {/* Download PNG Butonu */}
+      {/* Download PNG butonu */}
       <button
         className="absolute bottom-[60px] right-[60px] px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow text-sm"
         onClick={() => {
