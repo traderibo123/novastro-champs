@@ -12,6 +12,7 @@ interface RankingData {
 export default function ChampionCard({ username, data }: { username: string, data: RankingData }) {
   return (
     <div className="relative w-[768px] h-[768px] text-white font-sans" id="card">
+      
       {/* Arka Plan Görseli */}
       <Image
         src="/template.png"
@@ -28,7 +29,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           @{username}
         </div>
 
-        {/* Rank + Title */}
+        {/* Rank + Title (5 zaman dilimi) */}
         {[
           { time: '7d', top: 260 },
           { time: '30d', top: 335 },
@@ -46,12 +47,12 @@ export default function ChampionCard({ username, data }: { username: string, dat
           </div>
         ))}
 
-        {/* Share on X */}
+        {/* Share on X Butonu */}
         <button
-          className="absolute bottom-[60px] left-[60px] z-20 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] rounded text-white font-semibold shadow text-sm"
+          className="absolute bottom-[60px] right-[160px] z-20 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] rounded text-white font-semibold shadow text-sm"
           onClick={() => {
             const tweetText = encodeURIComponent(
-              "Check out my Novastro Champion Card! 🏆 #Novastro $XNL @Novastro_xyz @traderibo123"
+              "Check out my Novastro Champion Card! 🏆  $XNL @Novastro_xyz @traderibo123"
             )
             const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`
             window.open(tweetUrl, '_blank')
@@ -60,7 +61,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           Share on X
         </button>
 
-        {/* Download PNG */}
+        {/* Download PNG Butonu */}
         <button
           className="absolute bottom-[60px] right-[60px] z-20 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow text-sm"
           onClick={() => {
@@ -79,7 +80,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           Download PNG
         </button>
 
-        {/* Footer */}
+        {/* Footer - İmza */}
         <div className="absolute bottom-[25px] w-full text-center text-xs text-gray-400 italic">
           Crafted by <a href="https://x.com/traderibo123" className="hover:underline">@traderibo123</a>
         </div>
