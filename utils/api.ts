@@ -6,17 +6,27 @@ export async function fetchAllRankings(username: string) {
   const allData = await Promise.all(
     durations.map(async (duration) => {
       try {
-        const res = await fetch(
-          `${baseUrl}?duration=${duration}&topic_id=${topicId}&top_n=100&customized_community=customized&community_yaps=true`
-        )
+        const url = `${baseUrl}?duration=${duration}&topic_id=${topicId}&top_n=100&customized_community=customized&community_yaps=true`
+        console.log('Fetching from:', url)
+
+        const res = await fetch(url)
         const json = await res.json()
+
+        // Eğer json.data mevcut değilse hata mesajı verip atla
+        if (!json || !json.data || !Array.isArray(json.data)) {
+          console.error(`❌ [${duration}] No data array in response`, json)
+          return [duration, { rank: null, title: '' }]
+        }
 
         const index = json.data.findIndex(
           (entry: any) =>
-            entry.twitter_handle?.toLowerCase() === username.toLowerCase()
+            entry?.twitter_handle?.toLowerCase() === username.toLowerCase()
         )
 
-        if (index === -1) return [duration, { rank: null, title: '' }]
+        if (index === -1) {
+          console.log(`ℹ️ [${duration}] ${username} not found in list`)
+          return [duration, { rank: null, title: '' }]
+        }
 
         const rank = index + 1
         const title =
@@ -30,7 +40,7 @@ export async function fetchAllRankings(username: string) {
 
         return [duration, { rank, title }]
       } catch (error) {
-        console.error(`Error fetching for ${duration}:`, error)
+        console.error(`🔥 Error fetching for ${duration}:`, error)
         return [duration, { rank: null, title: '' }]
       }
     })
