@@ -13,7 +13,7 @@ export async function fetchAllRankings(username: string) {
 
         console.log(`📦 [${duration}] raw response:`, json)
 
-        const dataArray = json?.data
+        const dataArray = json?.data || json
         if (!Array.isArray(dataArray)) {
           console.error(`❌ [${duration}] No valid data array`, json)
           return [duration, { rank: null, title: '' }]
