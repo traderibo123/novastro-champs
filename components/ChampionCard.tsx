@@ -10,17 +10,21 @@ interface RankingData {
 export default function ChampionCard({ username, data }: { username: string, data: RankingData }) {
   return (
     <div className="relative w-[768px] h-[768px] text-white font-sans" id="card">
+      {/* Arka plan */}
       <Image
         src="/template.png"
         alt="Champion Background"
         fill
         className="object-cover z-0"
       />
+
       <div className="absolute inset-0 z-10">
+        {/* Kullanıcı adı */}
         <div className="absolute top-[40px] left-[295px] text-3xl font-bold">
           @{username}
         </div>
 
+        {/* Rank + Title - Daha ortalı */}
         {[
           { time: '7d', top: 260 },
           { time: '30d', top: 335 },
@@ -31,7 +35,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           <div
             key={time}
             className="absolute flex gap-8 text-[20px] font-semibold"
-            style={{ top: `${top}px`, left: '435px' }}
+            style={{ top: `${top}px`, left: '405px' }}  // ← Burayı değiştirdik
           >
             <span className="w-10 text-right">
               {data[time]?.rank !== null ? data[time]?.rank : '—'}
@@ -42,6 +46,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           </div>
         ))}
 
+        {/* Share on X */}
         <button
           className="absolute bottom-[60px] right-[200px] z-20 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] rounded text-white font-semibold shadow text-sm"
           onClick={() => {
@@ -55,6 +60,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           Share on X
         </button>
 
+        {/* Download */}
         <button
           className="absolute bottom-[60px] right-[60px] z-20 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow text-sm"
           onClick={() => {
@@ -73,6 +79,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           Download PNG
         </button>
 
+        {/* Footer */}
         <div className="absolute bottom-[25px] w-full text-center text-xs text-gray-400 italic">
           Crafted by <a href="https://x.com/traderibo123" className="hover:underline">@traderibo123</a>
         </div>
