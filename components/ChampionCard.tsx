@@ -29,7 +29,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           @{username}
         </div>
 
-        {/* Rank + Title (5 zaman dilimi) */}
+        {/* Rank + Title (boş veri için "-" yerine boş bırak) */}
         {[
           { time: '7d', top: 260 },
           { time: '30d', top: 335 },
@@ -42,17 +42,21 @@ export default function ChampionCard({ username, data }: { username: string, dat
             className="absolute flex gap-8 text-[20px] font-semibold"
             style={{ top: `${top}px`, left: '435px' }}
           >
-            <span className="w-10 text-right">{data[time]?.rank ?? '-'}</span>
-            <span className="w-52">{data[time]?.title ?? '-'}</span>
+            <span className="w-10 text-right">
+              {data[time]?.rank !== null ? data[time]?.rank : ''}
+            </span>
+            <span className="w-52">
+              {data[time]?.title || ''}
+            </span>
           </div>
         ))}
 
-        {/* Share on X Butonu */}
+        {/* Share on X */}
         <button
-          className="absolute bottom-[60px] right-[160px] z-20 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] rounded text-white font-semibold shadow text-sm"
+          className="absolute bottom-[60px] right-[200px] z-20 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] rounded text-white font-semibold shadow text-sm"
           onClick={() => {
             const tweetText = encodeURIComponent(
-              "Check out my Novastro Champion Card! 🏆  $XNL @Novastro_xyz @traderibo123"
+              "Check out my Novastro Champion Card! 🏆 #Novastro $XNL @Novastro_xyz @traderibo123"
             )
             const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`
             window.open(tweetUrl, '_blank')
@@ -61,7 +65,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           Share on X
         </button>
 
-        {/* Download PNG Butonu */}
+        {/* Download PNG */}
         <button
           className="absolute bottom-[60px] right-[60px] z-20 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow text-sm"
           onClick={() => {
