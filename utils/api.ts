@@ -11,9 +11,9 @@ export async function fetchAllRankings(username: string) {
         const res = await fetch(url)
         const json = await res.json()
 
-        // Gelen veri doğrudan dizi mi yoksa .data içinde mi?
-        const dataArray = Array.isArray(json) ? json : json?.data
+        console.log(`📦 [${duration}] raw response:`, json)
 
+        const dataArray = json?.data
         if (!Array.isArray(dataArray)) {
           console.error(`❌ [${duration}] No valid data array`, json)
           return [duration, { rank: null, title: '' }]
