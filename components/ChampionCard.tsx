@@ -1,4 +1,3 @@
-
 import Image from 'next/image'
 
 interface RankingData {
@@ -12,15 +11,21 @@ export default function ChampionCard({ username, data }: { username: string, dat
   const timeframes = ['7d', '30d', '3m', '6m', '12m']
 
   return (
-    <div id="card" className="flex flex-col items-center p-6 text-white bg-[#0c1b2a] rounded-xl shadow-lg max-w-md mx-auto">
-      <a href="https://x.com/traderibo123" target="_blank" rel="noopener noreferrer">
-        <h1 className="text-xl font-bold mb-2 hover:underline text-cyan-300">@{username}</h1>
+    <div id="card" className="card-wrapper w-full max-w-md text-center">
+      <a
+        href="https://x.com/traderibo123"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:underline text-cyan-300 font-bold text-lg"
+      >
+        @{username}
       </a>
-      <h2 className="text-lg font-semibold text-cyan-400 mb-4">NOVASTRO CHAMPION</h2>
 
-      <table className="table-auto text-sm text-left border-separate border-spacing-y-2 mb-4">
+      <h2 className="text-cyan-400 font-semibold text-md mt-1 mb-4">NOVASTRO CHAMPION</h2>
+
+      <table className="table-auto text-sm text-left mx-auto mb-4">
         <thead>
-          <tr>
+          <tr className="text-gray-400">
             <th className="pr-4">Time</th>
             <th className="pr-4">Rank</th>
             <th className="pr-4">Title</th>
@@ -37,13 +42,13 @@ export default function ChampionCard({ username, data }: { username: string, dat
         </tbody>
       </table>
 
-      <div className="text-center mt-2">
+      <div className="flex flex-col items-center gap-2 mt-4">
         <Image src="/novastro-logo.png" alt="Novastro Logo" width={60} height={60} />
-        <p className="text-cyan-300 font-semibold mt-2">CHAMPION OF NOVASTRO</p>
+        <p className="text-cyan-300 font-semibold text-sm">CHAMPION OF NOVASTRO</p>
       </div>
 
       <button
-        className="mt-6 px-4 py-2 bg-cyan-700 hover:bg-cyan-800 rounded"
+        className="download-btn"
         onClick={() => {
           const element = document.getElementById('card')
           if (!element) return
@@ -60,7 +65,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
         Download Card as PNG
       </button>
 
-      <p className="text-xs text-gray-400 mt-4">Crafted by @traderibo123</p>
+      <p className="footer-text">Crafted by @traderibo123</p>
     </div>
   )
 }
