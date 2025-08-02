@@ -37,12 +37,12 @@ export async function fetchAllRankings(username: string) {
         const rank = index + 1
         const title =
           rank <= 20
-            ? 'Tokenization Wizard'
+            ? 'Novastro Vanguard'
             : rank <= 50
-            ? 'Tokenization Grandmaster'
+            ? 'Novastro Strategist'
             : rank <= 100
-            ? 'Tokenization Master'
-            : 'Early Tokenizer'
+            ? 'Novastro Enroller'
+            : 'Novastro Citizen'
 
         return [duration, { rank, title }]
       } catch (error) {
