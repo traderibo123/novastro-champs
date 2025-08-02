@@ -29,7 +29,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
           @{username}
         </div>
 
-        {/* Rank + Title (boş veri için hiç göstermiyor) */}
+        {/* Rank + Title (boş veri için anlamlı placeholder) */}
         {[
           { time: '7d', top: 260 },
           { time: '30d', top: 335 },
@@ -43,10 +43,10 @@ export default function ChampionCard({ username, data }: { username: string, dat
             style={{ top: `${top}px`, left: '435px' }}
           >
             <span className="w-10 text-right">
-              {data[time]?.rank !== null ? data[time]?.rank : ''}
+              {data[time]?.rank !== null ? data[time]?.rank : '—'}
             </span>
             <span className="w-52">
-              {data[time]?.title || ''}
+              {data[time]?.title || 'Unranked'}
             </span>
           </div>
         ))}
