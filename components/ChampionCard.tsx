@@ -15,21 +15,21 @@ export default function ChampionCard({ username, data }: { username: string, dat
       style={{ backgroundImage: "url('/template.png')" }}
     >
       {/* Kullanıcı adı */}
-      <div className="absolute top-[50px] left-[295px] text-2xl font-bold">
+      <div className="absolute top-[40px] left-[295px] text-3xl font-bold">
         @{username}
       </div>
 
-      {/* Rank + Title satırları - biraz daha aşağı alındı */}
+      {/* Rank + Title satırları - daha aşağı ve daha büyük */}
       {[
-        { time: '7d', top: 240 },
-        { time: '30d', top: 310 },
-        { time: '3m', top: 380 },
-        { time: '6m', top: 450 },
-        { time: '12m', top: 520 },
+        { time: '7d', top: 260 },
+        { time: '30d', top: 335 },
+        { time: '3m', top: 410 },
+        { time: '6m', top: 485 },
+        { time: '12m', top: 560 },
       ].map(({ time, top }) => (
         <div
           key={time}
-          className="absolute flex gap-8 text-[18px] font-medium"
+          className="absolute flex gap-8 text-[20px] font-semibold"
           style={{ top: `${top}px`, left: '435px' }}
         >
           <span className="w-10 text-right">{data[time]?.rank ?? '-'}</span>
