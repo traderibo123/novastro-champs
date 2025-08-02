@@ -8,47 +8,44 @@ interface RankingData {
 }
 
 export default function ChampionCard({ username, data }: { username: string, data: RankingData }) {
-  const timeframes = ['7d', '30d', '3m', '6m', '12m']
-
   return (
-    <div id="card" className="card-wrapper w-full max-w-md text-center">
-      <a
-        href="https://x.com/traderibo123"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:underline text-cyan-300 font-bold text-lg"
-      >
+    <div
+      id="card"
+      className="w-[768px] h-[768px] relative bg-cover bg-center text-white"
+      style={{ backgroundImage: "url('/template.png')" }}
+    >
+      {/* Kullanıcı Adı */}
+      <div className="absolute top-[40px] left-[280px] text-xl font-bold text-white">
         @{username}
-      </a>
-
-      <h2 className="text-cyan-400 font-semibold text-md mt-1 mb-4">NOVASTRO CHAMPION</h2>
-
-      <table className="table-auto text-sm text-left mx-auto mb-4">
-        <thead>
-          <tr className="text-gray-400">
-            <th className="pr-4">Time</th>
-            <th className="pr-4">Rank</th>
-            <th className="pr-4">Title</th>
-          </tr>
-        </thead>
-        <tbody>
-          {timeframes.map((tf) => (
-            <tr key={tf}>
-              <td className="pr-4">{tf}</td>
-              <td className="pr-4">{data[tf]?.rank ?? '-'}</td>
-              <td className="pr-4">{data[tf]?.title ?? '-'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div className="flex flex-col items-center gap-2 mt-4">
-        <Image src="/novastro-logo.png" alt="Novastro Logo" width={60} height={60} />
-        <p className="text-cyan-300 font-semibold text-sm">CHAMPION OF NOVASTRO</p>
       </div>
 
+      {/* Sıralamalar ve Unvanlar */}
+      {[
+        { time: '7d', top: 125 },
+        { time: '30d', top: 180 },
+        { time: '3m', top: 235 },
+        { time: '6m', top: 290 },
+        { time: '12m', top: 345 }
+      ].map(({ time, top }) => (
+        <div key={time} className="absolute flex gap-6" style={{ top: `${top}px`, left: '420px' }}>
+          <span className="w-10">{data[time]?.rank ?? '-'}</span>
+          <span>{data[time]?.title ?? '-'}</span>
+        </div>
+      ))}
+
+      {/* Novastro logosu */}
+      <div className="absolute bottom-[100px] left-[100px]">
+        <Image src="/novastro-logo.png" alt="Novastro Logo" width={60} height={60} />
+      </div>
+
+      {/* Kart altı yazı */}
+      <div className="absolute bottom-[40px] w-full text-center text-xs text-gray-400 italic">
+        Crafted by @traderibo123
+      </div>
+
+      {/* PNG İndir Butonu */}
       <button
-        className="download-btn"
+        className="absolute bottom-[40px] right-[60px] px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow"
         onClick={() => {
           const element = document.getElementById('card')
           if (!element) return
@@ -62,10 +59,8 @@ export default function ChampionCard({ username, data }: { username: string, dat
           })
         }}
       >
-        Download Card as PNG
+        Download PNG
       </button>
-
-      <p className="footer-text">Crafted by @traderibo123</p>
     </div>
   )
 }
