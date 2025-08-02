@@ -10,12 +10,12 @@ export async function fetchAllRankings(username: string) {
           `${baseUrl}?duration=${duration}&topic_id=${topicId}&top_n=100&customized_community=customized&community_yaps=true`
         )
         const json = await res.json()
+
         const index = json.data.findIndex(
           (entry: any) => entry.twitter_handle.toLowerCase() === username.toLowerCase()
         )
-        if (index === -1) {
-          return [duration, { rank: null, title: '' }]
-        }
+
+        if (index === -1) return [duration, { rank: null, title: '' }]
 
         const rank = index + 1
         const title =
@@ -29,7 +29,7 @@ export async function fetchAllRankings(username: string) {
 
         return [duration, { rank, title }]
       } catch (error) {
-        console.error(`Error fetching ${duration}:`, error)
+        console.error(`Error fetching for ${duration}:`, error)
         return [duration, { rank: null, title: '' }]
       }
     })
