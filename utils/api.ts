@@ -1,30 +1,30 @@
 export async function fetchAllRankings(username: string) {
   const durations = ['7d', '30d', '3m', '6m', '12m']
   const topicId = 'NYT'
-  const baseUrl = 'https://hub.kaito.ai/api/v1/gateway/ai/kol/mindshare/top-leaderboard'
+  const baseUrl =
+    'https://hub.kaito.ai/api/v1/gateway/ai/kol/mindshare/top-leaderboard'
 
   const allData = await Promise.all(
     durations.map(async (duration) => {
       try {
         const url = `${baseUrl}?duration=${duration}&topic_id=${topicId}&top_n=100&customized_community=customized&community_yaps=true`
-        console.log('Fetching from:', url)
-
         const res = await fetch(url)
         const json = await res.json()
 
-        // Eğer json.data mevcut değilse hata mesajı verip atla
-        if (!json || !json.data || !Array.isArray(json.data)) {
-          console.error(`❌ [${duration}] No data array in response`, json)
+        // Gelen veri doğrudan dizi mi yoksa .data içinde mi?
+        const dataArray = Array.isArray(json) ? json : json?.data
+
+        if (!Array.isArray(dataArray)) {
+          console.error(`❌ [${duration}] No valid data array`, json)
           return [duration, { rank: null, title: '' }]
         }
 
-        const index = json.data.findIndex(
+        const index = dataArray.findIndex(
           (entry: any) =>
             entry?.twitter_handle?.toLowerCase() === username.toLowerCase()
         )
 
         if (index === -1) {
-          console.log(`ℹ️ [${duration}] ${username} not found in list`)
           return [duration, { rank: null, title: '' }]
         }
 
