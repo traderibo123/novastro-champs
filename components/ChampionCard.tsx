@@ -11,35 +11,35 @@ export default function ChampionCard({ username, data }: { username: string, dat
   return (
     <div
       id="card"
-      className="w-[1152px] h-[1152px] relative bg-cover bg-center text-white"
+      className="w-[768px] h-[768px] relative bg-cover bg-center text-white"
       style={{ backgroundImage: "url('/template.png')" }}
     >
       {/* Kullanıcı adı */}
-      <div className="absolute top-[100px] left-[460px] text-3xl font-bold text-white">
+      <div className="absolute top-[66px] left-[310px] text-xl font-bold">
         @{username}
       </div>
 
-      {/* Rank + Title - aşağıya kaydırılmış ve büyütülmüş */}
+      {/* Rank ve Title Verileri */}
       {[
-        { time: '7d', top: 330 },
-        { time: '30d', top: 415 },
-        { time: '3m', top: 505 },
-        { time: '6m', top: 595 },
-        { time: '12m', top: 685 },
+        { time: '7d', top: 220 },
+        { time: '30d', top: 285 },
+        { time: '3m', top: 350 },
+        { time: '6m', top: 415 },
+        { time: '12m', top: 480 },
       ].map(({ time, top }) => (
         <div
           key={time}
-          className="absolute flex gap-12 text-[22px] font-semibold"
-          style={{ top: `${top}px`, left: '645px' }}
+          className="absolute flex gap-8 text-[18px] font-medium"
+          style={{ top: `${top}px`, left: '435px' }}
         >
-          <span className="w-12 text-right">{data[time]?.rank ?? '-'}</span>
-          <span className="w-72">{data[time]?.title ?? '-'}</span>
+          <span className="w-10 text-right">{data[time]?.rank ?? '-'}</span>
+          <span className="w-52">{data[time]?.title ?? '-'}</span>
         </div>
       ))}
 
-      {/* Download butonu */}
+      {/* Download PNG Butonu */}
       <button
-        className="absolute bottom-[80px] right-[80px] px-5 py-3 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow text-lg"
+        className="absolute bottom-[60px] right-[60px] px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow text-sm"
         onClick={() => {
           const element = document.getElementById('card')
           if (!element) return
@@ -57,7 +57,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
       </button>
 
       {/* Footer */}
-      <div className="absolute bottom-[30px] w-full text-center text-sm text-gray-400 italic">
+      <div className="absolute bottom-[25px] w-full text-center text-xs text-gray-400 italic">
         Crafted by <a href="https://x.com/traderibo123" className="hover:underline">@traderibo123</a>
       </div>
     </div>
