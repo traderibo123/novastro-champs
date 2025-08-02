@@ -15,42 +15,27 @@ export default function ChampionCard({ username, data }: { username: string, dat
       style={{ backgroundImage: "url('/template.png')" }}
     >
       {/* Kullanıcı adı */}
-      <div className="absolute top-[35px] left-[240px] text-2xl font-bold text-white">
+      <div className="absolute top-[30px] left-[255px] text-2xl font-bold text-white">
         @{username}
       </div>
 
-      {/* Başlık */}
-      <div className="absolute top-[85px] left-[190px] text-3xl font-extrabold text-white tracking-wide">
-        NOVASTRO CHAMPION
-      </div>
-
-      {/* Zaman dilimlerine göre Rank + Title (pozisyonlanmış şekilde) */}
+      {/* Zaman dilimlerine göre Rank + Title */}
       {[
-        { time: '7d', top: 140 },
-        { time: '30d', top: 195 },
-        { time: '3m', top: 250 },
-        { time: '6m', top: 305 },
-        { time: '12m', top: 360 },
+        { time: '7d', top: 138 },
+        { time: '30d', top: 192 },
+        { time: '3m', top: 247 },
+        { time: '6m', top: 302 },
+        { time: '12m', top: 357 },
       ].map(({ time, top }) => (
-        <div key={time} className="absolute flex gap-6 text-[15px]" style={{ top: `${top}px`, left: '430px' }}>
+        <div key={time} className="absolute flex gap-8 text-[16px]" style={{ top: `${top}px`, left: '430px' }}>
           <span className="w-10 font-semibold">{data[time]?.rank ?? '-'}</span>
           <span className="w-56">{data[time]?.title ?? '-'}</span>
         </div>
       ))}
 
-      {/* Novastro logosu */}
-      <div className="absolute bottom-[120px] left-[95px]">
-        <Image src="/novastro-logo.png" alt="Novastro Logo" width={60} height={60} />
-      </div>
-
-      {/* CHAMPION OF NOVASTRO yazısı */}
-      <div className="absolute bottom-[120px] left-[180px] text-xl font-semibold text-white tracking-wide">
-        CHAMPION OF NOVASTRO
-      </div>
-
-      {/* Download butonu */}
+      {/* PNG İndir Butonu */}
       <button
-        className="absolute bottom-[50px] right-[60px] px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow"
+        className="absolute bottom-[60px] right-[60px] px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded text-white font-semibold shadow"
         onClick={() => {
           const element = document.getElementById('card')
           if (!element) return
