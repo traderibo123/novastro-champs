@@ -11,17 +11,23 @@ export async function fetchAllRankings(username: string) {
         const res = await fetch(url)
         const json = await res.json()
 
-        console.log(`📦 [${duration}] raw response:`, json)
+        // Esnek JSON içeriği çözümleme
+        const dataArray = Array.isArray(json)
+          ? json
+          : json?.data ?? json?.response?.data ?? json?.results ?? []
 
-        const dataArray = json?.data || json
+        console.log(`[${duration}] Parsed data:`, dataArray)
+
         if (!Array.isArray(dataArray)) {
-          console.error(`❌ [${duration}] No valid data array`, json)
+          console.error(`❌ [${duration}] Unexpected data format`, json)
           return [duration, { rank: null, title: '' }]
         }
 
+        // Farklı handle alanlarını kontrol et
         const index = dataArray.findIndex(
           (entry: any) =>
-            entry?.twitter_handle?.toLowerCase() === username.toLowerCase()
+            (entry?.twitter_handle || entry?.handle || entry?.username || '')
+              .toLowerCase() === username.toLowerCase()
         )
 
         if (index === -1) {
