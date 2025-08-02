@@ -19,7 +19,7 @@ export default function ChampionCard({ username, data }: { username: string, dat
         @{username}
       </div>
 
-      {/* Rank + Title satırları - daha aşağı ve daha büyük */}
+      {/* Rank + Title */}
       {[
         { time: '7d', top: 260 },
         { time: '30d', top: 335 },
@@ -54,6 +54,20 @@ export default function ChampionCard({ username, data }: { username: string, dat
         }}
       >
         Download PNG
+      </button>
+
+      {/* Share on X */}
+      <button
+        className="absolute bottom-[60px] left-[60px] px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] rounded text-white font-semibold shadow text-sm"
+        onClick={() => {
+          const tweetText = encodeURIComponent(
+            "Check out my Novastro Champion Card! 🏆 #Novastro $XNL @Novastro_xyz @traderibo123"
+          )
+          const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`
+          window.open(tweetUrl, '_blank')
+        }}
+      >
+        Share on X
       </button>
 
       {/* Footer */}
