@@ -3,35 +3,20 @@ export async function fetchAllRankings(username: string) {
   const topicId = 'NYT'
   const baseUrl = 'https://hub.kaito.ai/api/v1/gateway/ai/kol/mindshare/top-leaderboard'
 
-  const cleanedUsername = username.trim().toLowerCase()
-
   const allData = await Promise.all(
     durations.map(async (duration) => {
       try {
-        const url = `${baseUrl}?duration=${duration}&topic_id=${topicId}&top_n=100&customized_community=customized&community_yaps=true`
-        const res = await fetch(url)
-
-        if (!res.ok) {
-          console.error(`❌ API error for ${duration}: ${res.status}`)
-          return [duration, { rank: null, title: '' }]
-        }
-
+        const res = await fetch(
+          `${baseUrl}?duration=${duration}&topic_id=${topicId}&top_n=100&customized_community=customized&community_yaps=true`
+        )
         const json = await res.json()
 
-        // Güvenlik kontrolü
-        if (!json?.data || !Array.isArray(json.data)) {
-          console.error(`⚠️ Unexpected response for ${duration}:`, json)
-          return [duration, { rank: null, title: '' }]
-        }
-
-        const index = json.data.findIndex((entry: any) =>
-          entry.twitter_handle?.trim().toLowerCase() === cleanedUsername
+        const index = json.data.findIndex(
+          (entry: any) =>
+            entry.twitter_handle?.toLowerCase() === username.toLowerCase()
         )
 
-        if (index === -1) {
-          console.log(`ℹ️ User not found in ${duration} rankings: @${cleanedUsername}`)
-          return [duration, { rank: null, title: '' }]
-        }
+        if (index === -1) return [duration, { rank: null, title: '' }]
 
         const rank = index + 1
         const title =
@@ -43,11 +28,9 @@ export async function fetchAllRankings(username: string) {
             ? 'Tokenization Master'
             : 'Early Tokenizer'
 
-        console.log(`✅ ${duration}: @${username} is #${rank} → ${title}`)
-
         return [duration, { rank, title }]
       } catch (error) {
-        console.error(`🚨 Error fetching for ${duration}:`, error)
+        console.error(`Error fetching for ${duration}:`, error)
         return [duration, { rank: null, title: '' }]
       }
     })
