@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-[#0a0f1c] to-[#101f33] text-white;
+  font-family: 'Inter', sans-serif;
+}
+
+input {
+  @apply rounded px-3 py-2 text-black shadow focus:outline-none focus:ring-2 focus:ring-cyan-400;
+}
+
+button {
+  @apply transition-all duration-300;
+}
+
+.card-wrapper {
+  @apply p-6 bg-gradient-to-br from-[#0e1829] to-[#142d4c] rounded-2xl shadow-2xl text-white;
+}
+
+.download-btn {
+  @apply mt-6 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded shadow-md font-semibold;
+}
+
+.footer-text {
+  @apply text-xs text-gray-400 mt-4 italic;
+}
